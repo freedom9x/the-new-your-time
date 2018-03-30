@@ -8,6 +8,8 @@ const defaultState = {
   selectedPageId: 1,
   errorMsg: '',
   windowWidth: 0,
+  selectedNewId: -1,
+  detailDialogStatus: false,
 }
 
 const newsReducer = (state = defaultState, action) => {
@@ -46,6 +48,16 @@ const newsReducer = (state = defaultState, action) => {
       return {
         ...state,
         windowWidth: action.windowWidth,
+      }
+    case newActions.SET_SELECTED_NEW_ID:
+      return {
+        ...state,
+        selectedNewId: action.selectedNewId,
+      }
+    case newActions.SET_DETAIL_DIALOG_STATUS:
+      return {
+        ...state,
+        detailDialogStatus: action.status,
       }
     default:
       return state

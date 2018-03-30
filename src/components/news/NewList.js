@@ -4,14 +4,14 @@ import NewItem from './NewItem'
 
 class NewList extends React.PureComponent {
   render() {
-    const { items } = this.props
+    const { items, selectNew } = this.props
     return (
 
       // <div className="row new-list-container">
       <div className="row">
         {
-          items.map(content => (
-            <NewItem content={content} key={content._id} />
+          items.map((content, index) => (
+            <NewItem content={content} key={content._id} selectNew={selectNew} index={index} />
         ))
         }
       </div>
@@ -31,4 +31,5 @@ NewList.propTypes = {
     source: PropTypes.string,
     _id: PropTypes.string,
   })).isRequired,
+  selectNew: PropTypes.func.isRequired,
 }

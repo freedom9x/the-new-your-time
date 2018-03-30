@@ -3,12 +3,15 @@ import PropTypes from 'prop-types'
 import { TinyPagination } from 'react-pagination-custom'
 import { FlatButton, RaisedButton } from 'material-ui'
 import NewList from '../news/NewList'
+import NewDetailDialog from '../news/NewDetailDialog'
 
 class Home extends React.PureComponent {
   constructor(props) {
     super(props)
     this.changePage = this.changePageId.bind(this)
     this.renderBtnNumber = this.renderBtnNumber.bind(this)
+    this.selectNew = this.selectNew.bind(this)
+    this.closeDetailDialog = this.closeDetailDialog.bind(this)
   }
 
   componentDidMount() {
@@ -19,9 +22,13 @@ class Home extends React.PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    const { selectedPageId } = this.props
+    const { selectedPageId, selectedNewId } = this.props
     if (prevProps.selectedPageId !== selectedPageId) {
       this.props.fetchNewList('singapore', selectedPageId - 1)
+    }
+
+    if (selectedNewId > -1) {
+      this.props.setDetailDialogStatus(true)
     }
   }
 
@@ -42,6 +49,15 @@ class Home extends React.PureComponent {
         this.props.changePageId(pageId)
         break
     }
+  }
+
+  closeDetailDialog() {
+    this.props.setDetailDialogStatus(false)
+    this.props.selectNew(-1)
+  }
+
+  selectNew(id) {
+    this.props.selectNew(id)
   }
 
   renderBtnNumber(pageId) {
@@ -72,8 +88,11 @@ class Home extends React.PureComponent {
     )
   }
 
+
   renderList() {
-    const { news, selectedPageId, windowWidth } = this.props
+    const {
+      news, selectedPageId, windowWidth, detailDialogStatus, selectedNewId,
+    } = this.props
     let maxBtnPerSide = 2
     if (windowWidth < 900) {
       maxBtnPerSide = 0
@@ -82,7 +101,7 @@ class Home extends React.PureComponent {
     }
     return (
       <div className="container">
-        <NewList items={news} />
+        <NewList items={news} selectNew={this.selectNew} />
         <div className="row">
           <TinyPagination
             total={10 * 201}
@@ -95,6 +114,11 @@ class Home extends React.PureComponent {
             nextKey="..."
           />
         </div>
+        <NewDetailDialog
+          isOpen={detailDialogStatus}
+          content={news[selectedNewId]}
+          handleClose={this.closeDetailDialog}
+        />
       </div>
     )
   }
@@ -125,11 +149,14 @@ Home.propTypes = {
   })).isRequired,
   isSuccess: PropTypes.bool.isRequired,
   isFail: PropTypes.bool.isRequired,
-  // isFetching: PropTypes.bool.isRequired,
   errorMsg: PropTypes.string.isRequired,
   selectedPageId: PropTypes.number.isRequired,
   changePageId: PropTypes.func.isRequired,
   setWindowWidth: PropTypes.func.isRequired,
   windowWidth: PropTypes.number.isRequired,
+  detailDialogStatus: PropTypes.bool.isRequired,
+  selectedNewId: PropTypes.number.isRequired,
+  selectNew: PropTypes.func.isRequired,
+  setDetailDialogStatus: PropTypes.func.isRequired,
 }
 

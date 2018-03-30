@@ -22,6 +22,7 @@
 .new-item{
   overflow: scroll;
   height: 30em;
+  cursor: pointer;
 }
 
 .new-item-container{

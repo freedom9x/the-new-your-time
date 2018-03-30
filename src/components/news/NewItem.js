@@ -5,6 +5,16 @@ import { Paper } from 'material-ui'
 const { I18n } = require('react-redux-i18n')
 
 class NewItem extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.selectNew = this.selectNew.bind(this)
+  }
+
+  selectNew() {
+    const { index } = this.props
+    this.props.selectNew(index)
+  }
+
   renderImage() {
     const { content } = this.props
     const dumImageUrl = 'https://g1.nyt.com/assets/homepage/20180328-164832/images/foundation/logos/nyt-logo-379x64.svg'
@@ -38,6 +48,7 @@ class NewItem extends React.PureComponent {
         <Paper
           className="col-xs-12 new-item"
           zDepth={2}
+          onClick={this.selectNew}
         >
           {this.renderImage()}
           <div className="col-xs-12 new-title">{content.headline.main} </div>
@@ -59,7 +70,7 @@ export default NewItem
 NewItem.defaultProps = {
   content: {
     snippet: '',
-    multimedia: '',
+    multimedia: [],
     pub_date: '',
     source: '',
   },
@@ -74,4 +85,6 @@ NewItem.propTypes = {
     pub_date: PropTypes.string,
     source: PropTypes.string,
   }),
+  selectNew: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 }

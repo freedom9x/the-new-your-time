@@ -11,6 +11,7 @@ const translationsObject = {
       sourceDate: 'by %{source} on %{date}',
       on: 'on',
       from: 'from',
+      multimedia: 'Multimedia',
     },
 
   },
