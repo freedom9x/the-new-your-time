@@ -8,10 +8,10 @@ class Home extends React.PureComponent {
   }
 
   render() {
-    const { news, title, isSuccess } = this.props
+    const { news, isSuccess } = this.props
     return (
       <div>
-        {title}
+        <div className="home-image-header" />
         <div>
           {
             isSuccess ? <NewList items={news} /> : null
@@ -26,7 +26,6 @@ class Home extends React.PureComponent {
 export default Home
 
 Home.propTypes = {
-  title: PropTypes.string.isRequired,
   fetchNewList: PropTypes.func.isRequired,
   news: PropTypes.arrayOf(PropTypes.shape({
     snippet: PropTypes.string,

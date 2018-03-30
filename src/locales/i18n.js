@@ -7,6 +7,12 @@ const translationsObject = {
     date: {
       long: 'MMM d YYYY',
     },
+    newItem: {
+      sourceDate: 'by %{source} on %{date}',
+      on: 'on',
+      from: 'from',
+    },
+
   },
   fr: {
 

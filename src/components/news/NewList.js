@@ -6,7 +6,8 @@ class NewList extends React.PureComponent {
   render() {
     const { items } = this.props
     return (
-      <div className=" row new-list-container">
+
+      <div className="row new-list-container">
         {
           items.map(content => (
             <NewItem content={content} key={content._id} />

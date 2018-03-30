@@ -33,7 +33,7 @@ store.dispatch(setLocale('en'))
 ReactDOM.render(
   <MuiThemeProvider>
     <Provider store={store}>
-      <HomeContainer title="NewYorkTime" />
+      <HomeContainer />
     </Provider>
   </MuiThemeProvider>,
   document.getElementById('root'),
