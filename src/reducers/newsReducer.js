@@ -5,6 +5,9 @@ const defaultState = {
   isFetching: false,
   isFail: false,
   isSuccess: false,
+  selectedPageId: 1,
+  errorMsg: '',
+  windowWidth: 0,
 }
 
 const newsReducer = (state = defaultState, action) => {
@@ -15,6 +18,7 @@ const newsReducer = (state = defaultState, action) => {
         isFetching: true,
         isFail: false,
         isSuccess: false,
+        errorMsg: '',
       }
     case newActions.FETCH_NEWS_FAIL:
       return {
@@ -22,6 +26,7 @@ const newsReducer = (state = defaultState, action) => {
         isFetching: false,
         isFail: true,
         isSuccess: false,
+        errorMsg: action.errorMsg,
       }
     case newActions.FETCH_NEWS_SUCCESS:
       return {
@@ -30,6 +35,17 @@ const newsReducer = (state = defaultState, action) => {
         isFail: false,
         isSuccess: true,
         news: action.news,
+        errorMsg: '',
+      }
+    case newActions.CHANGE_PAGE_ID:
+      return {
+        ...state,
+        selectedPageId: action.selectedPageId,
+      }
+    case newActions.SET_WINDOW_WIDTH:
+      return {
+        ...state,
+        windowWidth: action.windowWidth,
       }
     default:
       return state

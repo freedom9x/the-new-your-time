@@ -12,7 +12,7 @@ class NewItem extends React.PureComponent {
       return (
         <div
           style={{ backgroundImage: `url(https://www.nytimes.com/${content.multimedia[0].url})` }}
-          className="col-xs-12 item-image"
+          className="row item-image"
         />
       )
     }
@@ -24,7 +24,7 @@ class NewItem extends React.PureComponent {
         opacity: '0.4',
         backgroundColor: '#4c4a4a',
        }}
-      className="col-xs-12 item-image"
+      className="row item-image"
     />)
   }
 
@@ -32,17 +32,24 @@ class NewItem extends React.PureComponent {
     const { content } = this.props
     const date = I18n.l(content.pub_date, { dateFormat: 'date.long' })
     return (
-      <Paper zDepth={1} className="col-xs-11 col-md-6 col-lg-6 new-item">
-        {this.renderImage()}
-        <div className="col-xs-12 new-title">{content.headline.main} </div>
-        <div className="col-xs-12 new-snippet">{content.snippet} </div>
-        <div className="col-xs-12 new-date-source">
-          {I18n.t('newItem.from')}
-          <span className="new-source"> {content.source} </span>
-          {I18n.t('newItem.on')}
-          <span className="new-date"> {date}</span>
-        </div>
-      </Paper>
+      <div
+        className="col-xs-12 col-sm-6 col-lg-6 new-item-container"
+      >
+        <Paper
+          className="col-xs-12 new-item"
+          zDepth={2}
+        >
+          {this.renderImage()}
+          <div className="col-xs-12 new-title">{content.headline.main} </div>
+          <div className="col-xs-12 new-date-source">
+            {I18n.t('newItem.from')}
+            <span className="new-source"> {content.source} </span>
+            {I18n.t('newItem.on')}
+            <span className="new-date"> {date}</span>
+          </div>
+          <div className="col-xs-12 new-snippet">{content.snippet} </div>
+        </Paper>
+      </div>
     )
   }
 }

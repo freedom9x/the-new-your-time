@@ -13,6 +13,3 @@ export default function fetchNews(location, page) {
   })
   return promise
 }
-// export default getNewService = {
-//   fetchNews,
-// }
