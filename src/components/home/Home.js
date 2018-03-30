@@ -30,7 +30,9 @@ Home.propTypes = {
   fetchNewList: PropTypes.func.isRequired,
   news: PropTypes.arrayOf(PropTypes.shape({
     snippet: PropTypes.string,
-    multimedia: PropTypes.string,
+    multimedia: PropTypes.arrayOf(PropTypes.shape({
+      url: PropTypes.string,
+    })),
     pub_date: PropTypes.string,
     source: PropTypes.string,
   })).isRequired,
