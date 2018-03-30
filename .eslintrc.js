@@ -10,7 +10,9 @@ module.exports = {
                 "extensions": [".js", ".jsx"]
             }
         ],
-        "semi": ["error", "never"]
+        "semi": ["error", "never"],
+        "no-underscore-dangle": [0, { "allow": [] }]
+
     }
 
 };

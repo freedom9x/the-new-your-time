@@ -1,15 +1,32 @@
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux'
+import { createLogger } from 'redux-logger'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Home from './components/home'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import HomeContainer from './containers/HomeContainer'
 import reducers from './reducers/reducers'
 import './styles/app.css'
 
-const store = createStore(reducers)
+let middleware = [thunkMiddleware]
+const logger = createLogger({
+  diff: true,
+  duration: true,
+  collapsed: true,
+})
+if (process.env.NODE_ENV !== 'production') {
+  middleware = [
+    ...middleware,
+    logger,
+  ]
+}
+const store = createStore(reducers, applyMiddleware(...middleware))
 ReactDOM.render(
-  <Provider store={store}>
-    <Home title="HelloWorld" />
-  </Provider>,
+  <MuiThemeProvider>
+    <Provider store={store}>
+      <HomeContainer title="NewYorkTime" />
+    </Provider>
+  </MuiThemeProvider>,
   document.getElementById('root'),
 )
