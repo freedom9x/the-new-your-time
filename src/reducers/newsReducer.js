@@ -1,6 +1,6 @@
 import * as newActions from '../actions/newAction'
 
-const defaultState = {
+export const defaultState = {
   news: [],
   isFetching: false,
   isFail: false,

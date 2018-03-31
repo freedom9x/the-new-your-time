@@ -40,7 +40,6 @@ export const setDetailDialogStatus = status => ({
 
 export const fetchNewList = (location, page) => (
   (dispatch) => {
-    // call fetch news
     dispatch({
       type: FETCH_NEWS,
     })
