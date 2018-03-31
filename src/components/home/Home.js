@@ -4,6 +4,7 @@ import { TinyPagination } from 'react-pagination-custom'
 import { FlatButton, RaisedButton } from 'material-ui'
 import NewList from '../news/NewList'
 import NewDetailDialog from '../news/NewDetailDialog'
+import SkeNewList from '../news/SkeNewList'
 
 class Home extends React.PureComponent {
   constructor(props) {
@@ -37,6 +38,8 @@ class Home extends React.PureComponent {
   }
 
   changePageId(pageId) {
+    window.scrollTo(0, 0)
+
     const { selectedPageId } = this.props
     switch (pageId) {
       case 'PRE':
@@ -52,8 +55,8 @@ class Home extends React.PureComponent {
   }
 
   closeDetailDialog() {
-    this.props.setDetailDialogStatus(false)
     this.props.selectNew(-1)
+    this.props.setDetailDialogStatus(false)
   }
 
   selectNew(id) {
@@ -124,12 +127,15 @@ class Home extends React.PureComponent {
   }
 
   render() {
-    const { isSuccess, isFail, errorMsg } = this.props
+    const {
+      isSuccess, isFail, errorMsg, isFetching,
+    } = this.props
     return (
       <div>
         <div className="home-image-header" />
         {isSuccess ? this.renderList() : null}
         {isFail ? <div style={{ color: 'red' }} >{errorMsg} </div> : null}
+        {isFetching ? <SkeNewList numberOfSkeNew={4} /> : null}
       </div>
     )
   }
@@ -149,6 +155,7 @@ Home.propTypes = {
   })).isRequired,
   isSuccess: PropTypes.bool.isRequired,
   isFail: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   errorMsg: PropTypes.string.isRequired,
   selectedPageId: PropTypes.number.isRequired,
   changePageId: PropTypes.func.isRequired,

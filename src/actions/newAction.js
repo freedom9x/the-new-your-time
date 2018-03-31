@@ -53,8 +53,3 @@ export const fetchNewList = (location, page) => (
   }
 )
 
-
-// export const fetchNewList = (location, page) => ({
-//   type: CHANGE_ERROR_MESSAGE,
-//   error,
-// })

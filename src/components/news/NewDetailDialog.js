@@ -38,15 +38,13 @@ class NewDetailDialog extends React.PureComponent {
             </div>
             <div className="col-xs-12">
               {I18n.t('newItem.Multimedia')}
-              <ul>
-                {content.multimedia.map(mul => (
-                  <i key={mul.url}>
-                    <a href={imageBaseUrl + mul.url} target="_blank">
-                      {imageBaseUrl + mul.url}
-                    </a>
-                  </i>
+              {content.multimedia.map(mul => (
+                <div key={mul.url}>
+                  <a href={imageBaseUrl + mul.url} target="_blank">
+                    {imageBaseUrl + mul.url}
+                  </a>
+                </div>
                 ))}
-              </ul>
             </div>
           </Dialog>
         </div>
